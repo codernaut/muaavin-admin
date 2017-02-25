@@ -108,11 +108,11 @@ public class UserCustomAdapter extends BaseAdapter {
                 if (holder.BlockButton.getText().toString().equals("Block User"))
                 {
                     holder.BlockButton.setText("UnBlock"); users.get(position).state = "Blocked";
-                    new WebHttpGetReq(context).execute("http://169.254.68.212:8080/Muaavin-Web/rest/Users/BlockUser?user_id=" + AesEncryption.encrypt(users.get(position).id));
+                    new WebHttpGetReq(context).execute("http://13.76.175.64:8080/Muaavin-Web/rest/Users/BlockUser?user_id=" + AesEncryption.encrypt(users.get(position).id)+"&isTwitterUser="+users.get(position).isTwitterUser);
                 } else
                 {
                     holder.BlockButton.setText("Block User"); users.get(position).state = "UnBlocked";
-                    new WebHttpGetReq(context).execute("http://169.254.68.212:8080/Muaavin-Web/rest/Users/UnBlockUser?user_id=" + AesEncryption.encrypt(users.get(position).id));
+                    new WebHttpGetReq(context).execute("http://13.76.175.64:8080/Muaavin-Web/rest/Users/UnBlockUser?user_id=" + AesEncryption.encrypt(users.get(position).id)+"&isTwitterUser="+users.get(position).isTwitterUser);
                 }
                 } catch (Exception e) { e.printStackTrace(); }
 
@@ -125,7 +125,7 @@ public class UserCustomAdapter extends BaseAdapter {
             if (!users.get(position).state.equals("Blocked")){ // Can Only be UnReported if User is not Blocked
               try
               {
-                new WebHttpGetReq(context).execute( "http://169.254.68.212:8080/Muaavin-Web/rest/Users/UnReportUser?user_id=" + AesEncryption.encrypt(users.get(position).id));
+                new WebHttpGetReq(context).execute( "http://13.76.175.64:8080/Muaavin-Web/rest/Users/UnReportUser?user_id=" + AesEncryption.encrypt(users.get(position).id)+"&isTwitterData="+users.get(position).isTwitterUser);
               } catch (Exception e) {  e.printStackTrace(); }
             } else { Toast.makeText(context, "User Already Blocked", Toast.LENGTH_LONG).show(); }
 

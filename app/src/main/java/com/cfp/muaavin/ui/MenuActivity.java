@@ -11,17 +11,18 @@ import com.cfp.muaavin.helper.DialogBoxHelper;
 
 
 public class MenuActivity extends ActionBarActivity {
-
+    //169.254.68.212
+    //13.76.175.64
     Admin admin = new Admin();
     Context context;
-    String[] group = {"A", "B", "C","All"};
+    //String[] group = {"A", "B", "C","All"};
+    String[] group = new String[]{"Sexual harassment", "Incitement to violence","Trans rights","All of the above"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         context = this;
-
 
     }
 

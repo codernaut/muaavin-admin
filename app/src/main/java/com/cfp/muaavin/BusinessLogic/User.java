@@ -12,6 +12,7 @@ public class User implements Serializable {
     public String profilePic;
     public String profileUrl;
     public String state;
+    public boolean isTwitterUser;
 
     public User()
     {
@@ -19,6 +20,7 @@ public class User implements Serializable {
         id = "";
         profileUrl= "";
         profilePic = "";
+
     }
 
 }

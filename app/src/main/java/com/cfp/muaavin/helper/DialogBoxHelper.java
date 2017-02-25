@@ -10,13 +10,13 @@ import com.cfp.muaavin.BusinessLogic.Admin;
  *
  */
 public class DialogBoxHelper {
-
-    public static void showDialogBox(final Admin admin,final Context context,final String[] group )
+    static String[] group = {"A", "B", "C","All"};
+    public static void showDialogBox(final Admin admin,final Context context,final String[] category )
     {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Select Group");
-        builder.setItems(group, new DialogInterface.OnClickListener() {
+        builder.setItems(category, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int index) {
                 String GroupName = group[index];

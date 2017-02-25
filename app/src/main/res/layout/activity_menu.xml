@@ -34,9 +34,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Block User"
+        android:text="View Users"
         android:id="@+id/Block"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="40dp"
         android:width="200dp"
         android:onClick="blockUser"
         android:layout_below="@+id/textView"
@@ -45,7 +45,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete Post"
+        android:text="View Reported Posts"
         android:id="@+id/delete"
         android:onClick="deletePost"
         android:layout_below="@+id/Block"
@@ -75,6 +75,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp"
         android:width="200dp"
+        android:visibility="gone"
         android:onClick="BrowsePost"
         />
 

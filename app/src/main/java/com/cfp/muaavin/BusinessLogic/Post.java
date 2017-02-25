@@ -11,8 +11,12 @@ public class Post implements Serializable {
  public String message;
  public String image;
  public String postUrl;
+ public boolean IsTwitterPost;
+ public boolean IsComment;
+ public User PostOwner = new User();
 
- public Post()
+
+    public Post()
   {
     id = "";
     message = "";

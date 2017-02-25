@@ -3,18 +3,21 @@ package com.cfp.muaavin.web;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-
 import com.cfp.muaavin.BusinessLogic.Post;
 import com.cfp.muaavin.BusinessLogic.User;
 import com.cfp.muaavin.BusinessLogic.UserInterface;
 import com.cfp.muaavin.helper.AesEncryption;
 import com.cfp.muaavin.helper.ImageHelper;
-
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
@@ -44,14 +47,12 @@ public class WebHttpGetReq extends AsyncTask<String, Void, Void> {
         option = Option;
         Dialog = new ProgressDialog(context);
         UsersDelagate = users_delegate;
-
     }
 
     public   WebHttpGetReq(Context contex)
     {
         context  = contex;
         Dialog = new ProgressDialog(context);
-
     }
     @Override
     protected void onPreExecute()
@@ -70,6 +71,14 @@ public class WebHttpGetReq extends AsyncTask<String, Void, Void> {
 
         try {
             URL url = new URL(params[0]);
+            //////////
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpGet httpGet= new HttpGet(params[0]);
+            HttpResponse response = httpclient.execute(httpGet);
+            HttpEntity entity = response.getEntity();
+            InputStream is = entity.getContent();
+
+            //////////
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
@@ -77,7 +86,7 @@ public class WebHttpGetReq extends AsyncTask<String, Void, Void> {
             wr.flush();
 
             // Get the server response
-            reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            reader = new BufferedReader(new InputStreamReader(/*conn.getInputStream()*/is));
             StringBuilder sb = new StringBuilder();
             String line = null;
 
@@ -143,16 +152,21 @@ public class WebHttpGetReq extends AsyncTask<String, Void, Void> {
         user.state = jsonResponse.optString("State");
         user.profilePic = ImageHelper.getDecodedImage(jsonResponse.optString("Profile_Pic"));
         user.profileUrl = "https://www.facebook.com/"+user.id;
+        user.isTwitterUser = jsonResponse.optBoolean("IsTwitterUser");
         return user;
     }
 
     public Post getPostDataFromWeb(JSONObject jsonResponse)
     {
         Post post = new Post();
+        post.PostOwner.id = jsonResponse.optString("infringingUserId");
         post.message = jsonResponse.optString("Post_Detail");
         post.id = jsonResponse.optString("Post_ID");
         post.image = jsonResponse.optString("Post_Image");
+        post.IsTwitterPost = jsonResponse.optBoolean("IsTwitterPost");
+        post.IsComment = jsonResponse.optBoolean("IsComment");
         post.postUrl = "https://www.facebook.com/"+post.id;
+
 
         return post;
     }

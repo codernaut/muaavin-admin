@@ -3,6 +3,7 @@ package com.cfp.muaavin.BusinessLogic;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,6 +69,11 @@ public class PostCustomAdapter extends BaseAdapter {
         final Holder holder = getHolder(rowView);
 
         holder.PostTextview.setText(Posts.get(position).message);
+        if(Posts.get(position).IsTwitterPost)
+        {
+            holder.PostHeading.setBackgroundColor(Color.parseColor("#00BFFF"));
+            holder.PostHeading.setText("Tweet");
+        }
 
         holder.CrossButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,10 +82,9 @@ public class PostCustomAdapter extends BaseAdapter {
                 String serverURL = null;
                 try
                 {
-                    serverURL = "http://169.254.68.212:8080/Muaavin-Web/rest/Posts_Query/DeletePosts?Post_id=" + AesEncryption.encrypt(Posts.get(position).id) + "&isPostOfSpecificUser="+false;
-                }   catch (Exception e) {
-                    e.printStackTrace();
-                }
+                    serverURL = "http://13.76.175.64:8080/Muaavin-Web/rest/Posts_Query/DeletePosts?Post_id=" + AesEncryption.encrypt(Posts.get(position).id) + "&isPostOfSpecificUser="+false+"&InfringingUserID="+AesEncryption.encrypt(Posts.get(position).PostOwner.id)+"&IsTwitterPost="+Posts.get(position).IsTwitterPost +"&IsComment="+Posts.get(position).IsComment;
+                }   catch (Exception e) { e.printStackTrace(); }
+
                 new WebHttpGetReq(context).execute(serverURL);
             }
         });
@@ -113,7 +118,7 @@ public class PostCustomAdapter extends BaseAdapter {
     {
         try
         {
-            context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
+          context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
         } catch (PackageManager.NameNotFoundException e)
         {
             e.printStackTrace();
