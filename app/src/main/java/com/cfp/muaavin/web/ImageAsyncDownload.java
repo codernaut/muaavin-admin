@@ -31,6 +31,7 @@ public class ImageAsyncDownload extends AsyncTask<String, Void, Bitmap> {
             InputStream in = new java.net.URL(url).openStream();
             mIcon = BitmapFactory.decodeStream(in);
 
+
         } catch (Exception e) {
             Log.e("Error", e.getMessage());
         }

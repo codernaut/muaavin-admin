@@ -143,21 +143,16 @@ public class WebHttpGetReq extends AsyncTask<String, Void, Void> {
         user.state = jsonResponse.optString("State");
         user.profilePic = ImageHelper.getDecodedImage(jsonResponse.optString("Profile_Pic"));
         user.profileUrl = "https://www.facebook.com/"+user.id;
-        user.isTwitterUser = jsonResponse.optBoolean("IsTwitterUser");
         return user;
     }
 
     public Post getPostDataFromWeb(JSONObject jsonResponse)
     {
         Post post = new Post();
-        post.PostOwner.id = jsonResponse.optString("infringingUserId");
         post.message = jsonResponse.optString("Post_Detail");
         post.id = jsonResponse.optString("Post_ID");
         post.image = jsonResponse.optString("Post_Image");
-        post.IsTwitterPost = jsonResponse.optBoolean("IsTwitterPost");
-        post.IsComment = jsonResponse.optBoolean("IsComment");
         post.postUrl = "https://www.facebook.com/"+post.id;
-
 
         return post;
     }

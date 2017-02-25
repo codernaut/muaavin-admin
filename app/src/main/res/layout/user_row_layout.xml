@@ -4,14 +4,14 @@
 
     <RelativeLayout
         android:id="@+id/relative_layout"
-        android:layout_width="300dp"
+        android:layout_width="400dp"
         android:layout_height="match_parent">
 
 
         <TextView android:text="@string/hello_world"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/userName" android:textSize="20dp"
+            android:id="@+id/userName" android:textSize="30dp"
             android:layout_toRightOf="@+id/Image_view"/>
 
         <ImageView
@@ -33,8 +33,7 @@
         android:background="#3b5998"
         android:layout_alignParentRight="true"
         android:layout_margin="7px"
-        android:textColor="#ffffff"
-        />
+        android:textColor="#ffffff"/>
 
     <Button
         android:id="@+id/Block"

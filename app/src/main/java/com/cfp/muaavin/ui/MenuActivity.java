@@ -11,7 +11,7 @@ import com.cfp.muaavin.helper.DialogBoxHelper;
 
 
 public class MenuActivity extends ActionBarActivity {
-    //169.254.68.212
+
     Admin admin = new Admin();
     Context context;
     String[] group = {"A", "B", "C","All"};
